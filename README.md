@@ -1,2 +1,2 @@
 # Library - программа для автоматизации процессов в библиотеках, созданная в учебных целях.
-![alt text](https://imgur.com/a/Ji6zDYQ)
+![Image alt](https://imgur.com/a/Ji6zDYQ)
