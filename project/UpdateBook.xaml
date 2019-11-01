@@ -1,0 +1,62 @@
+﻿<Window x:Class="WpfApp20.UpdateBook"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp20"
+        mc:Ignorable="d"
+        Title="Обновление книги." Height="400" Width="400" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Template" >
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <Grid Margin="10,0">
+                                <TextBlock x:Name="watermark" VerticalAlignment="Center" Visibility="Collapsed" FontSize="{TemplateBinding FontSize}" Opacity="0.4" Text="{TemplateBinding Tag}"></TextBlock>
+                                <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"></ScrollViewer>
+                                <Rectangle x:Name="rect" Fill="Transparent" Height="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,3"></Rectangle>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="GotFocus">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" AutoReverse="True" From="250" To="255" Duration="0:0:0.15" >
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase ></CubicEase>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetProperty="Height" AutoReverse="True" From="40" To="45" Duration="0:0:0.15" >
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase ></CubicEase>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter TargetName="rect" Property="Fill" Value="{Binding ElementName=border, Path=BorderBrush}"></Setter>
+                            </Trigger>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="watermark" Property="Visibility" Value="Visible"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+
+
+    <Grid>
+        <TextBox  Tag="Название" x:Name="TitleTxt" HorizontalAlignment="Left" Height="23" Margin="143,34,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="93"/>
+        <TextBox  Tag="Год публикации" x:Name="YearPublishtxt" HorizontalAlignment="Left" Height="23" Margin="143,62,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="93"/>
+        <TextBox Tag="Кол-во страниц" x:Name ="CountPagetxt" HorizontalAlignment="Left" Height="23" Margin="143,90,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="93"/>
+        <ComboBox  x:Name="SectionTxt" HorizontalAlignment="Left" Height="25" Margin="141,127,0,0" VerticalAlignment="Top" Width="95"/>
+        <ComboBox  x:Name="AuthorTxt" HorizontalAlignment="Left" Height="25" Margin="141,157,0,0" VerticalAlignment="Top" Width="95"/>
+        <Button Content="Обновить" HorizontalAlignment="Left" Height="25" Margin="135,195,0,0" VerticalAlignment="Top" Width="105" Click="Button_Click"/>
+
+    </Grid>
+</Window>

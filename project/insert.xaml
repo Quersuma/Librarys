@@ -1,0 +1,67 @@
+﻿<Page x:Class="WpfApp20.insert"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp20"
+         
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="insert">
+
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Template" >
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <Grid Margin="10,0">
+                                <TextBlock x:Name="watermark" VerticalAlignment="Center" Visibility="Collapsed" FontSize="{TemplateBinding FontSize}" Opacity="0.4" Text="{TemplateBinding Tag}"></TextBlock>
+                                <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"></ScrollViewer>
+                                <Rectangle x:Name="rect" Fill="Transparent" Height="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,3"></Rectangle>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="GotFocus">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" AutoReverse="True" From="250" To="255" Duration="0:0:0.15" >
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase ></CubicEase>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetProperty="Height" AutoReverse="True" From="40" To="45" Duration="0:0:0.15" >
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase ></CubicEase>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter TargetName="rect" Property="Fill" Value="{Binding ElementName=border, Path=BorderBrush}"></Setter>
+                            </Trigger>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="watermark" Property="Visibility" Value="Visible"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Button HorizontalAlignment="Left" Content="Добавить"  Height="40" Margin="340,330,0,0" VerticalAlignment="Top" Width="180" Click="Button_Click" />
+        <Label Content="Добавление книги" FontSize="25" HorizontalAlignment="Left" Height="50" Margin="285,65,0,0" VerticalAlignment="Top" Width="235"/>
+        <TextBox Text="{Binding names, UpdateSourceTrigger=PropertyChanged}" x:Name="names" Tag="Введите имя" HorizontalAlignment="Left" Height="30" Margin="340,130,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" PreviewTextInput="Names_PreviewTextInput">
+
+
+        </TextBox>
+        <TextBox x:Name="Year" Tag="Введите год публикации" HorizontalAlignment="Left" Height="35" Margin="340,200,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180"/>
+        <TextBox x:Name="Page" Tag="Введите количество страниц" HorizontalAlignment="Left" Height="40" Margin="340,240,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" PreviewTextInput="Page_PreviewTextInput"/>
+        <ComboBox  x:Name="author" IsReadOnly="True" IsEditable="True" Text="Выберите автора" HorizontalAlignment="Left" Height="35" Margin="340,285,0,0"   VerticalAlignment="Top" Width="180"/>
+        <ComboBox x:Name="sec" IsReadOnly="True" IsEditable="True" Text="Выберите жанр" HorizontalAlignment="Left" Height="30" Margin="340,165,0,0" VerticalAlignment="Top" Width="180" >
+
+        </ComboBox>
+    </Grid>
+</Page>
