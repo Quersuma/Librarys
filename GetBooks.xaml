@@ -1,0 +1,61 @@
+﻿<Page x:Class="WpfApp20.GetBooks"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp20"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GetBooks">
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Template" >
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <Grid Margin="10,0">
+                                <TextBlock x:Name="watermark" VerticalAlignment="Center" Visibility="Collapsed" FontSize="{TemplateBinding FontSize}" Opacity="0.4" Text="{TemplateBinding Tag}"></TextBlock>
+                                <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"></ScrollViewer>
+                                <Rectangle x:Name="rect" Fill="Transparent" Height="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,3"></Rectangle>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="GotFocus">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" AutoReverse="True" From="250" To="255" Duration="0:0:0.15" >
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase ></CubicEase>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetProperty="Height" AutoReverse="True" From="40" To="45" Duration="0:0:0.15" >
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase ></CubicEase>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter TargetName="rect" Property="Fill" Value="{Binding ElementName=border, Path=BorderBrush}"></Setter>
+                            </Trigger>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="watermark" Property="Visibility" Value="Visible"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Label Content="Выдача книги" FontSize="28" HorizontalAlignment="Left" Height="55" Margin="225,55,0,0" VerticalAlignment="Top" Width="205"/>
+        <TextBox Tag="Дата выдачи"  x:Name="Gettxt" HorizontalAlignment="Left" Height="35" Margin="305,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="185" RenderTransformOrigin="0.5,-0.455"/>
+        <TextBox Tag="Дата возврата" x:Name="Returntxt" HorizontalAlignment="Left" Height="32" Margin="305,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+
+        <Button Content="выдать" HorizontalAlignment="Left" Height="25" Margin="305,340,0,0" VerticalAlignment="Top" Width="160" Click="Button_Click"/>
+        <ComboBox x:Name="reader" HorizontalAlignment="Left" Height="35" Margin="310,215,0,0" VerticalAlignment="Top" Width="180"/>
+        <ComboBox x:Name="booksCombo" HorizontalAlignment="Left" Height="35" Margin="310,270,0,0" VerticalAlignment="Top" Width="180"/>
+
+    </Grid>
+</Page>
