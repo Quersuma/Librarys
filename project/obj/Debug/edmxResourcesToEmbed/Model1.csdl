@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="xxModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Authors">
+    <Key>
+      <PropertyRef Name="CodeAuthor" />
+    </Key>
+    <Property Name="CodeAuthor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Names" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Books" Relationship="Self.FK__Books__codeAt__145C0A3F" FromRole="Authors" ToRole="Books" />
+  </EntityType>
+  <EntityType Name="Books">
+    <Key>
+      <PropertyRef Name="CodeBook" />
+    </Key>
+    <Property Name="CodeBook" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codeAt" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SectionD" Type="Int32" />
+    <Property Name="YearPublish" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="CountPage" Type="Int32" />
+    <NavigationProperty Name="Authors" Relationship="Self.FK__Books__codeAt__145C0A3F" FromRole="Books" ToRole="Authors" />
+    <NavigationProperty Name="Section" Relationship="Self.FK__Books__SectionD__15502E78" FromRole="Books" ToRole="Section" />
+    <NavigationProperty Name="Getting" Relationship="Self.FK__Getting__codeBoo__1A14E395" FromRole="Books" ToRole="Getting" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Getting">
+    <Key>
+      <PropertyRef Name="NumberGet" />
+    </Key>
+    <Property Name="NumberGet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateGetting" Type="DateTime" Precision="0" />
+    <Property Name="DateReturn" Type="DateTime" Precision="0" />
+    <Property Name="NumberReader" Type="Int32" />
+    <Property Name="codeBooks" Type="Int32" />
+    <NavigationProperty Name="Books" Relationship="Self.FK__Getting__codeBoo__1A14E395" FromRole="Getting" ToRole="Books" />
+    <NavigationProperty Name="Reader" Relationship="Self.FK__Getting__NumberR__1B0907CE" FromRole="Getting" ToRole="Reader" />
+  </EntityType>
+  <EntityType Name="Reader">
+    <Key>
+      <PropertyRef Name="NumberTicket" />
+    </Key>
+    <Property Name="NumberTicket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telephone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Getting" Relationship="Self.FK__Getting__NumberR__1B0907CE" FromRole="Reader" ToRole="Getting" />
+  </EntityType>
+  <EntityType Name="Section">
+    <Key>
+      <PropertyRef Name="Section_Id" />
+    </Key>
+    <Property Name="Section_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Section1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Books" Relationship="Self.FK__Books__SectionD__15502E78" FromRole="Section" ToRole="Books" />
+  </EntityType>
+  <Association Name="FK__Books__codeAt__145C0A3F">
+    <End Role="Authors" Type="Self.Authors" Multiplicity="0..1" />
+    <End Role="Books" Type="Self.Books" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Authors">
+        <PropertyRef Name="CodeAuthor" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="codeAt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Books__SectionD__15502E78">
+    <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+    <End Role="Books" Type="Self.Books" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="Section_Id" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="SectionD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Getting__codeBoo__1A14E395">
+    <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+    <End Role="Getting" Type="Self.Getting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="CodeBook" />
+      </Principal>
+      <Dependent Role="Getting">
+        <PropertyRef Name="codeBooks" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Getting__NumberR__1B0907CE">
+    <End Role="Reader" Type="Self.Reader" Multiplicity="0..1" />
+    <End Role="Getting" Type="Self.Getting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reader">
+        <PropertyRef Name="NumberTicket" />
+      </Principal>
+      <Dependent Role="Getting">
+        <PropertyRef Name="NumberReader" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="xxEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Authors" EntityType="Self.Authors" />
+    <EntitySet Name="Books" EntityType="Self.Books" />
+    <EntitySet Name="Getting" EntityType="Self.Getting" />
+    <EntitySet Name="Reader" EntityType="Self.Reader" />
+    <EntitySet Name="Section" EntityType="Self.Section" />
+    <AssociationSet Name="FK__Books__codeAt__145C0A3F" Association="Self.FK__Books__codeAt__145C0A3F">
+      <End Role="Authors" EntitySet="Authors" />
+      <End Role="Books" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Books__SectionD__15502E78" Association="Self.FK__Books__SectionD__15502E78">
+      <End Role="Section" EntitySet="Section" />
+      <End Role="Books" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Getting__codeBoo__1A14E395" Association="Self.FK__Getting__codeBoo__1A14E395">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Getting" EntitySet="Getting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Getting__NumberR__1B0907CE" Association="Self.FK__Getting__NumberR__1B0907CE">
+      <End Role="Reader" EntitySet="Reader" />
+      <End Role="Getting" EntitySet="Getting" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

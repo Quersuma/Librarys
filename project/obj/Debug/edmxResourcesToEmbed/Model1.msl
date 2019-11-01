@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище xxModelContainer" CdmEntityContainer="xxEntities">
+    <EntitySetMapping Name="Authors">
+      <EntityTypeMapping TypeName="xxModel.Authors">
+        <MappingFragment StoreEntitySet="Authors">
+          <ScalarProperty Name="CodeAuthor" ColumnName="CodeAuthor" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Names" ColumnName="Names" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="xxModel.Books">
+        <MappingFragment StoreEntitySet="Books">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="CodeBook" ColumnName="CodeBook" />
+          <ScalarProperty Name="codeAt" ColumnName="codeAt" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="SectionD" ColumnName="SectionD" />
+          <ScalarProperty Name="YearPublish" ColumnName="YearPublish" />
+          <ScalarProperty Name="CountPage" ColumnName="CountPage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Getting">
+      <EntityTypeMapping TypeName="xxModel.Getting">
+        <MappingFragment StoreEntitySet="Getting">
+          <ScalarProperty Name="NumberGet" ColumnName="NumberGet" />
+          <ScalarProperty Name="DateGetting" ColumnName="DateGetting" />
+          <ScalarProperty Name="DateReturn" ColumnName="DateReturn" />
+          <ScalarProperty Name="NumberReader" ColumnName="NumberReader" />
+          <ScalarProperty Name="codeBooks" ColumnName="codeBooks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reader">
+      <EntityTypeMapping TypeName="xxModel.Reader">
+        <MappingFragment StoreEntitySet="Reader">
+          <ScalarProperty Name="NumberTicket" ColumnName="NumberTicket" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Section">
+      <EntityTypeMapping TypeName="xxModel.Section">
+        <MappingFragment StoreEntitySet="Section">
+          <ScalarProperty Name="Section_Id" ColumnName="Section_Id" />
+          <ScalarProperty Name="Section1" ColumnName="Section" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
